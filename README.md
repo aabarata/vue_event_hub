@@ -1,2 +1,2 @@
-# vue_event_hub_123980
+# vue_event_hub
 Created with CodeSandbox
