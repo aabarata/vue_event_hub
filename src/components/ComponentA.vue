@@ -22,7 +22,7 @@ export default {
     this.$eventHub.$on("validate-modal", this.validateModal);
   },
   beforeDestroy: function () {
-    this.$eventHub.$on("validate-modal", this.validateModal);
+    this.$eventHub.$off("validate-modal", this.validateModal);
   },
   methods: {
     openModal(data) {

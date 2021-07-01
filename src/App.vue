@@ -1,19 +1,20 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" width="25%" />
-    <HelloWorld msg="Hello Vue in CodeSandbox!" />
+    <div class="links">
+      <router-link :to="{ name: 'home' }">Home</router-link>
+      <router-link :to="{ name: 'about' }">About</router-link>
+    </div>
+    <router-view />
     <Modal />
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
 import Modal from "./components/Modal.vue";
 
 export default {
   name: "App",
   components: {
-    HelloWorld,
     Modal,
   },
 };
@@ -27,5 +28,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.links {
+  display: flex;
+  margin: 5px 0;
+  justify-content: space-around;
 }
 </style>

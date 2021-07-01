@@ -1,14 +1,16 @@
 <template>
-  <div class="modal-wrapper" v-if="isOpen" @click.self="close">
-    <div class="modal">
-      <component
-        :is="content"
-        :data="data"
-        @submit="processSubmit"
-        @cancel="processCancel"
-      ></component>
+  <transition name="app-modal">
+    <div class="modal-wrapper" v-if="isOpen" @click.self="close">
+      <div class="modal">
+        <component
+          :is="content"
+          :data="data"
+          @submit="processSubmit"
+          @cancel="processCancel"
+        ></component>
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -32,13 +34,14 @@ export default {
   },
   beforeDestroy: function () {
     this.$eventHub.$off("open-modal", this.open);
-    this.$eventHub.$on("close-modal", this.close);
+    this.$eventHub.$off("close-modal", this.close);
   },
   methods: {
     open(payload) {
       this.isOpen = true;
       this.content = payload.content;
       this.data = payload.data;
+      this.isOpen = false;
     },
     close() {
       this.isOpen = false;
@@ -72,4 +75,24 @@ export default {
     color: black;
   }
 }
-</style>
+.app-modal-enter-active {
+  transition: all 0.3s ease;
+  .modal {
+    transition: all 0.3s ease;
+  }
+}
+.app-modal-leave-active {
+  transition: all 0.6s cubic-bezier(1, 0.5, 0.8, 1);
+  .modal {
+    transition: all 0.6s cubic-bezier(1, 0.5, 0.8, 1);
+  }
+}
+.app-modal-enter,
+.app-modal-leave-to {
+  opacity: 0;
+}
+.app-modal-enter,
+.app-modal-leave-to {
+  .modal {
+    transform: scale(1.1);
+  }
