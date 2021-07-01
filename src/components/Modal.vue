@@ -41,7 +41,6 @@ export default {
       this.isOpen = true;
       this.content = payload.content;
       this.data = payload.data;
-      this.isOpen = false;
     },
     close() {
       this.isOpen = false;
@@ -96,3 +95,5 @@ export default {
   .modal {
     transform: scale(1.1);
   }
+}
+</style>
